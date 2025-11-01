@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Crea un evento')}"></head>
+
+<body class="bg-dark">
+    <!-- Header -->
+    <header>
+        <nav th:replace="~{fragments/navBar :: navBar}"></nav>
+    </header>
+    <!-- Fine Header -->
+
+    <!-- Main -->
+    <main class="mb-5">
+        <!-- Titolo -->
+        <h1 class="text-center text-light my-5">Crea il tuo evento!</h1>
+        <!-- Fine Titolo -->
+
+        <!-- Container Principale -->
+        <div class="container">
+            <!-- Form -->
+            <form th:action="@{/eventi/crea}" method="post" class="text-light" th:object="${evento}">
+                <!-- Row -->
+                <div class="row col-8 mx-auto">
+                    <!-- Nome -->
+                    <div class="col col-6">
+                        <label class="form-label" for="nome">Nome evento</label>
+                        <input type="text" id="nome" class="form-control" th:field="*{nome}" placeholder="Nome evento"
+                            th:errorClass="is-invalid">
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('nome')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Nome -->
+
+                    <!-- Luogo -->
+                    <div class="col col-6">
+                        <label class="form-label" for="luogo">Luogo</label>
+                        <input type="text" id="luogo" class="form-control" th:field="*{luogo}"
+                            placeholder="Luogo evento" th:errorClass="is-invalid">
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('luogo')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('luogo')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Luogo -->
+
+                    <!-- Categoria -->
+                    <div class="col col-5 mt-4">
+                        <label class="form-label" for="categoria">Categoria</label>
+                        <select id="categoria" th:field="*{categoria}" class="form-select" th:errorClass="is-invalid">
+                            <option value="">Seleziona una Categoria</option>
+                            <option th:each="categoria : ${categorie}" th:value="${categoria.id}">[[${categoria.nome}]]</option>
+                        </select>
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('categoria')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('categoria')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Categoria -->
+
+                    <!-- Data -->
+                    <div class="col col-3 mt-4">
+                        <label class="form-label" for="data">Data</label>
+                        <input type="date" id="data" class="form-control" th:field="*{data}" placeholder="data evento"
+                            th:errorClass="is-invalid">
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('data')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('data')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Data -->
+
+                    <!-- Orario Di Inizio -->
+                    <div class="col col-2 mt-4">
+                        <label class="form-label" for="orarioDiInizio">Orario Di Inizio</label>
+                        <input type="time" id="orarioDiInizio" class="form-control" th:field="*{orarioDiInizio}"
+                            th:errorClass="is-invalid">
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('orarioDiInizio')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('orarioDiInizio')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Orario Di Inizio -->
+
+                    <!-- Orario Di Fine -->
+                    <div class="col col-2 mt-4">
+                        <label class="form-label" for="orarioDiFine">Orario Di Fine</label>
+                        <input type="time" id="orarioDiFine" class="form-control" th:field="*{orarioDiFine}"
+                            th:errorClass="is-invalid">
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('orarioDiFine')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('orarioDiFine')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Orario Di Fine -->
+
+                    <!-- Descrizione -->
+                    <div class="col mt-4">
+                        <label class="form-label" for="descrizione">Descrizione</label>
+                        <textarea id="descrizione" class="form-control" th:field="*{descrizione}"
+                            placeholder="Descrizione evento" th:errorClass="is-invalid" rows="4"></textarea>
+
+                        <!-- Errore -->
+                        <div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback fs-6">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('descrizione')}">[[${err}]]</li>
+                            </ul>
+                        </div>
+                        <!-- Fine Errore -->
+                    </div>
+                    <!-- Fine Descrizione -->
+
+                    <!-- Pulsanti -->
+                    <div class="d-flex mt-5">
+                        <a th:href="@{/home}" class="btn btn-outline-danger col-3 me-auto"><i class="bi bi-x-lg"></i> Annulla</a>
+                        <button type="submit" class="btn btn-outline-primary col-3"><i class="bi bi-check-lg"></i> Crea</button>
+                    </div>
+                    <!-- Fine Pulsanti -->
+                </div>
+                <!-- Fine Row -->
+            </form>
+            <!-- Fine Form -->
+        </div>
+        <!-- Fine Contaier Principale -->
+    </main>
+    <!-- Fine Main -->
+
+    <!-- Popper Js -->
+    <script th:replace="~{fragments/popper :: popper}"></script>
+    <!-- End Popper JS -->
+</body>
+
+</html>

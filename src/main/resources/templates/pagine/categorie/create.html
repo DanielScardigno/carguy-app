@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Creazione categoria')}"></head>
+
+<body class="bg-dark">
+    <!-- Header -->
+    <header>
+        <nav th:replace="~{fragments/navBar :: navBar}"></nav>
+    </header>
+    <!-- Fine Header -->
+
+    <!-- Main -->
+    <main class="mb-5">
+        <!-- Titolo -->
+        <h1 class="text-center text-light my-5">Aggiungi categoria</h1>
+        <!-- Fine Titolo -->
+
+        <!-- Container Principale -->
+        <div class="container">
+            <!-- Form -->
+            <form th:action="@{/categorie/crea}" method="post" class="text-light col-6 mx-auto" th:object="${categoria}">
+                <!-- Nome -->
+                <label class="form-label" for="nome">Nome</label>
+                <input type="text" id="nome" class="form-control" th:field="*{nome}" placeholder="Nome categoria"
+                    th:errorClass="is-invalid">
+
+                <!-- Errore -->
+                <div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback fs-6">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('nome')}">[[${err}]]</li>
+                    </ul>
+                </div>
+                <!-- Fine Errore -->
+
+                <!-- Fine Nome -->
+
+                <!-- Descrizione -->
+                <label class="form-label mt-4" for="descrizione">Descrizione</label>
+                <textarea id="descrizione" class="form-control" th:field="*{descrizione}"
+                    placeholder="Descrizione categoria" th:errorClass="is-invalid" rows="4"></textarea>
+
+                <!-- Errore -->
+                <div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback fs-6">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('descrizione')}">[[${err}]]</li>
+                    </ul>
+                </div>
+                <!-- Fine Errore -->
+                <!-- Fine Descrizione -->
+
+                <!-- Pulsanti -->
+                <div class="d-flex mt-5">
+                    <a th:href="@{/categorie}" class="btn btn-outline-danger col-3 me-auto"><i class="bi bi-x-lg"></i> Annulla</a>
+                    <button type="submit" class="btn btn-outline-primary col-3">Aggiungi +</button>
+                </div>
+                <!-- Fine Pulsanti -->
+        </div>
+        <!-- Fine Row -->
+        </form>
+        <!-- Fine Form -->
+        </div>
+        <!-- Fine Contaier Principale -->
+    </main>
+    <!-- Fine Main -->
+
+    <!-- Popper Js -->
+    <script th:replace="~{fragments/popper :: popper}"></script>
+    <!-- End Popper JS -->
+</body>
+
+</html>
