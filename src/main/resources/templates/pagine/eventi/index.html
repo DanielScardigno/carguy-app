@@ -13,7 +13,9 @@
     <!-- Main -->
     <main>
         <!-- Titolo -->
-        <h1 class="text-center text-light mt-5 mb-4"><i class="bi bi-gear-fill"></i> Gestione eventi</h1>
+        <h1 class="text-center text-light mt-5 mb-4">
+            <i class="bi bi-gear-fill"></i> Gestione eventi
+        </h1>
         <!-- Fine Titolo -->
 
         <!-- Container Principale -->
@@ -30,8 +32,11 @@
 
                         <!-- Aggiungi Evento -->
                         <div class="card-body">
+
                             <a th:href="@{/eventi/crea}"
-                                class="btn btn-primary d-flex flex-fill justify-content-center">Aggiungi evento +</a>
+                                class="btn btn-primary d-flex flex-fill justify-content-center">
+                                Aggiungi evento +
+                            </a>
                         </div>
                         <!-- Fine Aggiungi Evento -->
 
@@ -39,16 +44,24 @@
 
                         <!-- Form Controlli -->
                         <form th:action="@{/eventi}" method="get">
+
                             <!-- Cerca -->
                             <div class="card-body">
                                 <div class="row">
+
                                     <div class="col col-9">
-                                        <input type="search" name="keyword" th:value="${keyword}"
-                                            class="col col-8 form-control" placeholder="Cerca">
+                                        <input type="search"
+                                            name="keyword"
+                                            th:value="${keyword}"
+                                            class="col col-8 form-control"
+                                            placeholder="Cerca">
                                     </div>
+
                                     <div class="col col-3 d-flex justify-content-stretch">
                                         <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
-                                            type="submit"><i class="bi bi-search"></i></button>
+                                            type="submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -58,29 +71,54 @@
 
                             <!-- Ordine -->
                             <div class="card-body">
-                                <h6><i class="bi bi-filter"></i> Ordina per</h6>
+
+                                <h6>
+                                    <i class="bi bi-filter"></i> Ordina per
+                                </h6>
 
                                 <div class="row">
+
                                     <div class="col col-9 d-flex justify-content-around pt-2 form-check">
+
                                         <div>
-                                            <input class="form-check-input" type="radio" name="order" id="radioNuovo"
-                                                value="nuovo" th:checked="${order} == 'nuovo'">
+                                            <input class="form-check-input"
+                                                type="radio"
+                                                name="order"
+                                                id="radioNuovo"
+                                                value="nuovo"
+                                                th:checked="${order} == 'nuovo'">
+
                                             <label class="form-check-label" for="radioNuovo">Nuovo</label>
                                         </div>
+
                                         <div>
-                                            <input class="form-check-input" type="radio" name="order" id="radioData"
-                                                value="data" th:checked="${order} == 'data'">
+                                            <input class="form-check-input"
+                                                type="radio"
+                                                name="order"
+                                                id="radioData"
+                                                value="data"
+                                                th:checked="${order} == 'data'">
+
                                             <label class="form-check-label" for="radioData">Data</label>
                                         </div>
+
                                         <div>
-                                            <input class="form-check-input" type="radio" name="order" id="radioNome"
-                                                value="nome" th:checked="${order} == 'nome'">
+                                            <input class="form-check-input"
+                                                type="radio"
+                                                name="order"
+                                                id="radioNome"
+                                                value="nome"
+                                                th:checked="${order} == 'nome'">
+
                                             <label class="form-check-label" for="radio1">Nome</label>
                                         </div>
                                     </div>
+
                                     <div class="col col-3 d-flex justify-content-stretch">
                                         <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
-                                            type="submit">Applica</button>
+                                            type="submit">
+                                            Applica
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -90,41 +128,77 @@
 
                             <!-- Filtra -->
                             <div class="card-body">
-                                <h6><i class="bi bi-sliders2"></i> Filtra per</h6>
+
+                                <h6>
+                                    <i class="bi bi-sliders2"></i> Filtra per
+                                </h6>
 
                                 <!-- Luogo -->
-                                <label class="form-label" for="luogo"><i class="bi bi-globe-americas-fill"></i>
-                                    Luogo</label>
+                                <label class="form-label" for="luogo">
+                                    <i class="bi bi-globe-americas-fill"></i>
+                                    Luogo
+                                </label>
+
                                 <select id="luogo" name="luogo" class="form-select">
-                                    <option selected="selected" value="">Seleziona un luogo</option>
+
+                                    <option selected="selected" value="">
+                                        Seleziona un luogo
+                                    </option>
+
                                     <option th:each="luogoCorrente : ${luoghi}"
-                                            th:value="${luogoCorrente}"
-                                            th:selected="${luogoCorrente == luogo}">[[${luogoCorrente}]]</option>
+                                        th:value="${luogoCorrente}"
+                                        th:selected="${luogoCorrente == luogo}">
+                                        [[${luogoCorrente}]]
+                                    </option>
                                 </select>
                                 <!-- Fine Luogo -->
 
                                 <!-- Data -->
-                                <label class="form-label mt-3" for="data"><i class="bi bi-calendar2-week-fill"></i>
-                                    Data</label>
-                                <input type="date" name="data" id="data" th:value="${data}" class="form-control">
+                                <label class="form-label mt-3" for="data">
+                                    <i class="bi bi-calendar2-week-fill"></i> Data
+                                </label>
+
+                                <input type="date"
+                                    name="data"
+                                    id="data"
+                                    th:value="${data}"
+                                    class="form-control">
                                 <!-- Fine Data -->
 
                                 <!-- categoria -->
-                                <label class="form-label mt-3" for="categoria"><i class="bi bi-bookmark-fill"></i>
-                                    Categoria</label>
+                                <label class="form-label mt-3" for="categoria">
+                                    <i class="bi bi-bookmark-fill"></i> Categoria
+                                </label>
+
                                 <select id="categoria" name="categoriaId" class="form-select">
-                                    <option selected="selected" value="">Seleziona una categoria</option>
+                                    
+                                    <option selected="selected" value="">
+                                        Seleziona una categoria
+                                    </option>
+
                                     <option th:each="categoriaCorrente : ${categorie}"
-                                            th:value="${categoriaCorrente.id}"
-                                            th:selected="${categoriaCorrente.id == categoriaId}">[[${categoriaCorrente.nome}]]</option>
+                                        th:value="${categoriaCorrente.id}"
+                                        th:selected="${categoriaCorrente.id == categoriaId}">
+                                        [[${categoriaCorrente.nome}]]
+                                    </option>
                                 </select>
                                 <!-- Fine Categoria -->
 
                                 <!-- Submit -->
                                 <div class="d-flex justify-content-stretch mt-4 gap-3 ms-auto">
-                                    <a th:href="@{/eventi}" class="btn btn-outline-danger"><i class="bi bi-arrow-counterclockwise"></i></a>
+
+                                    <!-- Reset -->
+                                    <a th:href="@{/eventi}" class="btn btn-outline-danger">
+                                        <i class="bi bi-arrow-counterclockwise"></i>
+                                    </a>
+                                    <!-- Fine Reset -->
+
+                                    <!-- Filtra -->
                                     <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
-                                        type="submit">Filtra</button>
+                                        type="submit">
+                                        Filtra
+                                    </button>
+                                    <!-- Fine Filtra -->
                                 </div>
                                 <!-- Fine Submit -->
                             </div>
@@ -138,18 +212,22 @@
 
                 <!-- Table Col -->
                 <div class="col col-8 mx-auto">
+
                     <div th:if="${eventiEsistenti.size() > 0}">
 
                         <!-- Srollable Wrapper Table -->
                         <div class="table-responsive" data-bs-theme="dark" style="max-height: 608px; overflow-y: auto;">
+
                             <!-- Table -->
                             <table class="table table table-dark table-hover" th:if="${eventiEsistenti.size > 0}">
+
                                 <thead class="sticky-top">
                                     <th>Nome evento</th>
                                     <th>Luogo</th>
                                     <th>Categoria</th>
                                     <th class="text-end">Azioni</th>
                                 </thead>
+
                                 <tbody>
                                     <tr th:each="evento : ${eventiMostrati}" th:object="${evento}">
                                         <td>[[*{nome}]]</td>
@@ -157,20 +235,30 @@
                                         <td>[[*{categoria.nome}]]</td>
                                         <td>
                                             <div class="d-flex justify-content-end gap-1">
+
                                                 <!-- Dettagli -->
-                                                <button type="button" class="btn btn-sm btn-outline-light"
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-light"
                                                     data-bs-toggle="modal"
                                                     th:data-bs-target="'#details-modal-' + *{id}">
+
                                                     <i class="bi bi-justify-left"></i>
                                                 </button>
 
                                                 <!-- Modale Dettagli -->
-                                                <div class="modal fade" th:id="'details-modal-' + *{id}"
-                                                    data-bs-backdrop="static" data-bs-theme="dark"
-                                                    data-bs-keyboard="false" tabindex="-1"
-                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal fade"
+                                                    th:id="'details-modal-' + *{id}"
+                                                    data-bs-backdrop="static"
+                                                    data-bs-theme="dark"
+                                                    data-bs-keyboard="false"
+                                                    tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel"
+                                                    aria-hidden="true">
+
                                                     <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
+
+                                                            <!-- Header Modale Dettagli -->
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">
                                                                     [[*{nome}]]
@@ -178,36 +266,53 @@
 
                                                                 <button type="button"
                                                                     class="btn btn-outline-danger ms-auto"
-                                                                    data-bs-dismiss="modal" aria-label="Close"><i
-                                                                        class="bi bi-x"></i></button>
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <i class="bi bi-x"></i>
+                                                                </button>
                                                             </div>
+                                                            <!-- Fine Header Modale Dettagli -->
+
+                                                            <!-- Body Modale Dettagli -->
                                                             <div class="modal-body text-start me-auto">
 
                                                                 <!-- Categoria -->
-                                                                <div class="text-light fw-medium fs-6 mb-1">Tipo di
-                                                                    evento</div>
+                                                                <div class="text-light fw-medium fs-6 mb-1">
+                                                                    Tipo di evento
+                                                                </div>
+
                                                                 <div class="text-secondary fw-medium mb-3">
                                                                     [[*{categoria.nome}]]
                                                                 </div>
                                                                 <!-- Fine Categoria -->
 
                                                                 <!-- Data / Ora -->
-                                                                <div class="text-light fw-medium fs-6 mb-1">Data e ora
+                                                                <div class="text-light fw-medium fs-6 mb-1">
+                                                                    Data e ora
                                                                 </div>
-                                                                <div class="text-secondary fw-medium mb-3">[[*{data}]] |
-                                                                    [[*{orarioDiInizio}]] - [[*{orarioDiFine}]]</div>
+
+                                                                <div class="text-secondary fw-medium mb-3">
+                                                                    [[*{data}]] | [[*{orarioDiInizio}]] - [[*{orarioDiFine}]]
+                                                                </div>
                                                                 <!-- Fine Data / Ora -->
 
                                                                 <!-- Luogo -->
-                                                                <div class="text-light fw-medium fs-6 mb-1">Luogo</div>
-                                                                <div class="text-secondary mb-3 fw-medium">[[*{luogo}]]
+                                                                <div class="text-light fw-medium fs-6 mb-1">
+                                                                    Luogo
+                                                                </div>
+
+                                                                <div class="text-secondary mb-3 fw-medium">
+                                                                    [[*{luogo}]]
                                                                 </div>
                                                                 <!-- Fine Luogo -->
 
                                                                 <!-- Descrizione -->
-                                                                <div class="text-light fw-medium fs-6 mb-1">Descrizione
+                                                                <div class="text-light fw-medium fs-6 mb-1">
+                                                                    Descrizione
                                                                 </div>
-                                                                <div class="text-secondary fw-medium">[[*{descrizione}]]
+
+                                                                <div class="text-secondary fw-medium">
+                                                                    [[*{descrizione}]]
                                                                 </div>
                                                                 <!-- Fine Descrizione -->
                                                             </div>
@@ -219,42 +324,65 @@
 
                                                 <!-- Modifica -->
                                                 <a th:href="@{|/eventi/*{id}/modifica|}"
-                                                    class="btn btn-sm btn-outline-primary"><i
-                                                        class="bi bi-pencil-fill"></i></a>
+                                                    class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </a>
                                                 <!-- Fine Modifica -->
 
                                                 <!-- Elimina -->
-                                                <button type="button" class="btn btn-sm btn-outline-danger"
-                                                    data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + *{id}">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    data-bs-toggle="modal"
+                                                    th:data-bs-target="'#delete-modal-' + *{id}">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
 
                                                 <!-- Modale Elimina -->
-                                                <div class="modal fade" th:id="'delete-modal-' + *{id}"
-                                                    data-bs-backdrop="static" data-bs-theme="dark"
-                                                    data-bs-keyboard="false" tabindex="-1"
-                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal fade"
+                                                    th:id="'delete-modal-' + *{id}"
+                                                    data-bs-backdrop="static"
+                                                    data-bs-theme="dark"
+                                                    data-bs-keyboard="false"
+                                                    tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel"
+                                                    aria-hidden="true">
+
                                                     <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
+
+                                                            <!-- Header Modale Elimina -->
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5 text-danger"
                                                                     id="staticBackdropLabel">
                                                                     <i class="bi bi-trash-fill"></i> Elimina evento
                                                                 </h1>
                                                             </div>
+                                                            <!-- Fine Header Modale Elimina -->
+
+                                                            <!-- Body Modale Elimina -->
                                                             <div class="modal-body me-auto">
                                                                 Sei sicuro di voler eliminare l'evento: "[[*{nome}]]"?
                                                             </div>
+                                                            <!-- Fine Body Modale Elimina -->
+
+                                                            <!-- Footer Modale Elimina -->
                                                             <div class="modal-footer">
+
                                                                 <button type="button"
                                                                     class="btn btn-outline-light me-auto"
-                                                                    data-bs-dismiss="modal">Annulla</button>
+                                                                    data-bs-dismiss="modal">
+                                                                    Annulla
+                                                                </button>
+
                                                                 <form th:action="@{|/eventi/*{id}/elimina|}"
                                                                     method="post">
                                                                     <button type="submit"
-                                                                        class="btn btn-outline-danger">Elimina</i></button>
+                                                                        class="btn btn-outline-danger">
+                                                                        Elimina</i>
+                                                                    </button>
                                                                 </form>
                                                             </div>
+                                                            <!-- Finr Footer Modale Elimina -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,7 +400,9 @@
                         <!-- Elemento sostitutivo Corrispondenze -->
                         <div class="text-secondary text-center mt-5 rounded border border-secondary py-3 col-6 mx-auto"
                             th:unless="${eventiMostrati.size > 0}">
+
                             <h3>Nessuna corrispondenza</h3>
+                            
                             <i class="bi bi-emoji-dizzy fs-1"></i>
                         </div>
                         <!-- Fine Elemento sostitutivo Corrispondenze -->
@@ -292,7 +422,9 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a th:href="@{/eventi/crea}" class="btn btn-lg btn-outline-light">Crea un evento</a>
+                    <a th:href="@{/eventi/crea}" class="btn btn-lg btn-outline-light">
+                        Crea un evento
+                    </a>
                 </div>
             </div>
             <!-- Fine Elemento Sostitutivo Eventi -->

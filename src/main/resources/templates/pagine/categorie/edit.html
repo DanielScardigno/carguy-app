@@ -12,17 +12,29 @@
 
     <!-- Main -->
     <main class="mb-5">
+
         <!-- Titolo -->
-        <h1 class="text-center text-light my-5"><i class="bi bi-pencil-fill"></i> Modifica categoria</h1>
+        <h1 class="text-center text-light my-5">
+            <i class="bi bi-pencil-fill"></i> Modifica categoria
+        </h1>
         <!-- Fine Titolo -->
 
         <!-- Container Principale -->
         <div class="container">
+
             <!-- Form -->
-            <form th:action="@{|/categorie/*{id}/modifica|}" method="post" class="text-light col-6 mx-auto" th:object="${categoria}">
+            <form th:action="@{|/categorie/*{id}/modifica|}"
+                method="post"
+                class="text-light col-6 mx-auto"
+                th:object="${categoria}">
+
                 <!-- Nome -->
                 <label class="form-label" for="nome">Nome</label>
-                <input type="text" id="nome" class="form-control" th:field="*{nome}" placeholder="Nome categoria"
+                <input type="text"
+                    id="nome"
+                    class="form-control"
+                    th:field="*{nome}"
+                    placeholder="Nome categoria"
                     th:errorClass="is-invalid">
 
                 <!-- Errore -->
@@ -37,8 +49,12 @@
 
                 <!-- Descrizione -->
                 <label class="form-label mt-4" for="descrizione">Descrizione</label>
-                <textarea id="descrizione" class="form-control" th:field="*{descrizione}"
-                    placeholder="Descrizione categoria" th:errorClass="is-invalid" rows="4"></textarea>
+                <textarea id="descrizione"
+                    class="form-control"
+                    th:field="*{descrizione}"
+                    placeholder="Descrizione categoria"
+                    th:errorClass="is-invalid"
+                    rows="4"></textarea>
 
                 <!-- Errore -->
                 <div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback fs-6">
@@ -51,14 +67,23 @@
 
                 <!-- Pulsanti -->
                 <div class="d-flex mt-5">
-                    <a th:href="@{/categorie}" class="btn btn-outline-danger col-3 me-auto"><i class="bi bi-x-lg"></i> Annulla</a>
-                    <button type="submit" class="btn btn-outline-primary col-3"><i class="bi bi-check-lg"></i> Aggiorna</button>
+
+                    <!-- Annulla -->
+                    <a th:href="@{/categorie}" class="btn btn-outline-danger col-3 me-auto">
+                        <i class="bi bi-x-lg"></i> Annulla
+                    </a>
+                    <!-- Fine Annulla -->
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-outline-primary col-3">
+                        <i class="bi bi-check-lg"></i> Aggiorna
+                    </button>
+                    <!-- Fine Submit -->
                 </div>
                 <!-- Fine Pulsanti -->
-        </div>
-        <!-- Fine Row -->
-        </form>
-        <!-- Fine Form -->
+                <!-- Fine Row -->
+            </form>
+            <!-- Fine Form -->
         </div>
         <!-- Fine Contaier Principale -->
     </main>

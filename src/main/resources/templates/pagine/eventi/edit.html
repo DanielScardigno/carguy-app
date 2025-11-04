@@ -13,19 +13,35 @@
     <!-- Main -->
     <main class="mb-5">
         <!-- Titolo -->
-        <h1 class="text-center text-light my-5"><i class="bi bi-pencil-fill"></i> Modifica evento</h1>
+        <h1 class="text-center text-light my-5">
+            <i class="bi bi-pencil-fill"></i> Modifica evento
+        </h1>
         <!-- Fine Titolo -->
 
         <!-- Container Principale -->
         <div class="container">
+
             <!-- Form -->
-            <form th:action="@{|/eventi/*{id}/modifica|}" method="post" class="text-light" th:object="${evento}">
+            <form th:action="@{|/eventi/*{id}/modifica|}"
+                method="post"
+                class="text-light"
+                th:object="${evento}">
+
                 <!-- Row -->
                 <div class="row col-8 mx-auto">
+
                     <!-- Nome -->
                     <div class="col col-6">
-                        <label class="form-label" for="nome">Nome evento</label>
-                        <input type="text" id="nome" class="form-control" th:field="*{nome}" placeholder="Nome evento"
+
+                        <label class="form-label" for="nome">
+                            Nome evento
+                        </label>
+
+                        <input type="text"
+                            id="nome"
+                            class="form-control"
+                            th:field="*{nome}"
+                            placeholder="Nome evento"
                             th:errorClass="is-invalid">
 
                         <!-- Errore -->
@@ -40,9 +56,17 @@
 
                     <!-- Luogo -->
                     <div class="col col-6">
-                        <label class="form-label" for="luogo">Luogo</label>
-                        <input type="text" id="luogo" class="form-control" th:field="*{luogo}"
-                            placeholder="Luogo evento" th:errorClass="is-invalid">
+
+                        <label class="form-label" for="luogo">
+                            Luogo
+                        </label>
+
+                        <input type="text"
+                            id="luogo"
+                            class="form-control"
+                            th:field="*{luogo}"
+                            placeholder="Luogo evento"
+                            th:errorClass="is-invalid">
 
                         <!-- Errore -->
                         <div th:if="${#fields.hasErrors('luogo')}" class="invalid-feedback fs-6">
@@ -56,10 +80,23 @@
 
                     <!-- Categoria -->
                     <div class="col col-5 mt-4">
-                        <label class="form-label" for="categoria">Categoria</label>
-                        <select id="categoria" th:field="*{categoria}" class="form-select" th:errorClass="is-invalid">
-                            <option value="">Seleziona una Categoria</option>
-                            <option th:each="categoria : ${categorie}" th:value="${categoria.id}">[[${categoria.nome}]]</option>
+
+                        <label class="form-label" for="categoria">
+                            Categoria
+                        </label>
+
+                        <select id="categoria"
+                            th:field="*{categoria}"
+                            class="form-select"
+                            th:errorClass="is-invalid">
+
+                            <option value="">
+                                Seleziona una Categoria
+                            </option>
+
+                            <option th:each="categoria : ${categorie}" th:value="${categoria.id}">
+                                [[${categoria.nome}]]
+                            </option>
                         </select>
 
                         <!-- Errore -->
@@ -74,8 +111,16 @@
 
                     <!-- Data -->
                     <div class="col col-3 mt-4">
-                        <label class="form-label" for="data">Data</label>
-                        <input type="date" id="data" class="form-control" th:field="*{data}" placeholder="data evento"
+
+                        <label class="form-label" for="data">
+                            Data
+                        </label>
+
+                        <input type="date"
+                            id="data"
+                            class="form-control"
+                            th:field="*{data}"
+                            placeholder="data evento"
                             th:errorClass="is-invalid">
 
                         <!-- Errore -->
@@ -90,8 +135,15 @@
 
                     <!-- Orario Di Inizio -->
                     <div class="col col-2 mt-4">
-                        <label class="form-label" for="orarioDiInizio">Orario Di Inizio</label>
-                        <input type="time" id="orarioDiInizio" class="form-control" th:field="*{orarioDiInizio}"
+
+                        <label class="form-label" for="orarioDiInizio">
+                            Orario Di Inizio
+                        </label>
+
+                        <input type="time"
+                            id="orarioDiInizio"
+                            class="form-control"
+                            th:field="*{orarioDiInizio}"
                             th:errorClass="is-invalid">
 
                         <!-- Errore -->
@@ -106,8 +158,15 @@
 
                     <!-- Orario Di Fine -->
                     <div class="col col-2 mt-4">
-                        <label class="form-label" for="orarioDiFine">Orario Di Fine</label>
-                        <input type="time" id="orarioDiFine" class="form-control" th:field="*{orarioDiFine}"
+
+                        <label class="form-label" for="orarioDiFine">
+                            Orario Di Fine
+                        </label>
+                        
+                        <input type="time"
+                            id="orarioDiFine"
+                            class="form-control"
+                            th:field="*{orarioDiFine}"
                             th:errorClass="is-invalid">
 
                         <!-- Errore -->
@@ -122,9 +181,18 @@
 
                     <!-- Descrizione -->
                     <div class="col mt-4">
-                        <label class="form-label" for="descrizione">Descrizione</label>
-                        <textarea id="descrizione" class="form-control" th:field="*{descrizione}"
-                            placeholder="Descrizione evento" th:errorClass="is-invalid" rows="4"></textarea>
+
+                        <label class="form-label" for="descrizione">
+                            Descrizione
+                        </label>
+                        
+                        <textarea id="descrizione"
+                            class="form-control"
+                            th:field="*{descrizione}"
+                            placeholder="Descrizione evento"
+                            th:errorClass="is-invalid"
+                            rows="4">
+                        </textarea>
 
                         <!-- Errore -->
                         <div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback fs-6">
@@ -138,8 +206,18 @@
 
                     <!-- Pulsanti -->
                     <div class="d-flex mt-5">
-                        <a th:href="@{/eventi}" class="btn btn-outline-danger col-3 me-auto"><i class="bi bi-x-lg"></i> Annulla</a>
-                        <button type="submit" class="btn btn-outline-primary col-3"><i class="bi bi-check-lg"></i> Aggiorna</button>
+
+                        <!-- Annulla -->
+                        <a th:href="@{/eventi}" class="btn btn-outline-danger col-3 me-auto">
+                            <i class="bi bi-x-lg"></i> Annulla
+                        </a>
+                        <!-- Fine Annulla -->
+
+                        <!-- Aggiorna -->
+                        <button type="submit" class="btn btn-outline-primary col-3">
+                            <i class="bi bi-check-lg"></i> Aggiorna
+                        </button>
+                        <!-- Fine Aggiorna -->
                     </div>
                     <!-- Fine Pulsanti -->
                 </div>

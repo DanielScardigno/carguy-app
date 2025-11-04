@@ -137,8 +137,12 @@ public class ControllerEvento {
     }
 
     @PostMapping("/crea")
-    public String store(Model model, @Valid @ModelAttribute(name = "evento") Evento eventoForm,
-            BindingResult bindingResult) {
+    public String store(
+        Model model,
+        @Valid
+        @ModelAttribute(name = "evento") Evento eventoForm,
+        BindingResult bindingResult
+    ) {
 
         model.addAttribute("categorie", repoCategoria.findAll());
 
@@ -151,7 +155,10 @@ public class ControllerEvento {
     }
 
     @GetMapping("/{id}/modifica")
-    public String edit(Model model, @PathVariable Integer id) {
+    public String edit(
+        Model model,
+        @PathVariable Integer id
+    ) {
 
         Optional<Evento> eventoOptional = repoEvento.findById(id);
 
@@ -165,8 +172,12 @@ public class ControllerEvento {
     }
 
     @PostMapping("/{id}/modifica")
-    public String update(Model model, @Valid @ModelAttribute(name = "evento") Evento eventoForm,
-            BindingResult bindingResult) {
+    public String update(
+        Model model,
+        @Valid
+        @ModelAttribute(name = "evento") Evento eventoForm,
+        BindingResult bindingResult
+    ) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categorie", repoCategoria.findAll());
@@ -178,7 +189,10 @@ public class ControllerEvento {
     }
 
     @PostMapping("/{id}/elimina")
-    public String delete(Model model, @PathVariable Integer id) {
+    public String delete(
+        Model model,
+        @PathVariable Integer id
+    ) {
 
         repoEvento.deleteById(id);
         return "redirect:/eventi";

@@ -8,6 +8,8 @@ import com.carguyheaven.carguy_app.Models.Categoria;
 
 public interface RepoCategoria extends JpaRepository<Categoria, Integer> {
 
-    public List<Categoria> findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(String nome,
-            String descrizione);
+    public List<Categoria> findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(
+        String nome,
+        String descrizione
+    );
 }

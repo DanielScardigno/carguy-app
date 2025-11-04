@@ -30,7 +30,10 @@ public class ControllerCategoria {
     RepoCategoria repoCategoria;
 
     @GetMapping
-    public String index(Model model, @RequestParam(required = false) String keyword) {
+    public String index(
+        Model model,
+        @RequestParam(required = false) String keyword
+    ) {
 
         model.addAttribute("categorieEsistenti", repoCategoria.findAll());
 
@@ -58,8 +61,12 @@ public class ControllerCategoria {
     }
 
     @PostMapping("/crea")
-    public String store(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm,
-            BindingResult bindingResult) {
+    public String store(
+        Model model,
+        @Valid
+        @ModelAttribute(name = "categoria") Categoria categoriaForm,
+        BindingResult bindingResult
+    ) {
 
         if (bindingResult.hasErrors()) {
             return "pagine/categorie/create";
@@ -70,7 +77,10 @@ public class ControllerCategoria {
     }
 
     @GetMapping("/{id}/modifica")
-    public String edit(Model model, @PathVariable Integer id) {
+    public String edit(
+        Model model,
+        @PathVariable Integer id
+    ) {
 
         Optional<Categoria> categoriaOptional = repoCategoria.findById(id);
 
@@ -83,8 +93,12 @@ public class ControllerCategoria {
     }
 
     @PostMapping("/{id}/modifica")
-    public String update(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm,
-            BindingResult bindingResult) {
+    public String update(
+        Model model,
+        @Valid
+        @ModelAttribute(name = "categoria") Categoria categoriaForm,
+        BindingResult bindingResult
+    ) {
 
         if (bindingResult.hasErrors()) {
             return "pagine/categorie/edit";
@@ -95,7 +109,10 @@ public class ControllerCategoria {
     }
 
     @PostMapping("/{id}/elimina")
-    public String delete(Model model, @PathVariable Integer id) {
+    public String delete(
+        Model model,
+        @PathVariable Integer id
+    ) {
 
         repoCategoria.deleteById(id);
         return "redirect:/categorie";

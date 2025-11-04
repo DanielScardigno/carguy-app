@@ -13,11 +13,14 @@
     <!-- Main -->
     <main class="mb-5">
         <!-- Titolo -->
-        <h1 class="text-center text-light my-5"><i class="bi bi-gear-fill"></i> Gestione categorie</h1>
+        <h1 class="text-center text-light my-5">
+            <i class="bi bi-gear-fill"></i> Gestione categorie
+        </h1>
         <!-- Fine Titolo -->
 
         <!-- Container Principale -->
         <div class="container">
+            
             <!-- Row Principale -->
             <div class="row col-6 mx-auto">
 
@@ -27,8 +30,9 @@
 
                         <!-- Aggiungi Categoria -->
                         <div class="card-body col col-5">
-                            <a th:href="@{/categorie/crea}"
-                                class="btn btn-primary d-flex flex-fill justify-content-center">Aggiungi categoria +</a>
+                            <a th:href="@{/categorie/crea}" class="btn btn-primary d-flex flex-fill justify-content-center">
+                                Aggiungi categoria +
+                            </a>
                         </div>
                         <!-- Fine Aggiungi Categoria -->
 
@@ -37,12 +41,17 @@
                             <form th:action="@{/categorie}" method="get">
                                 <div class="row">
                                     <div class="col col-9">
-                                        <input type="search" name="keyword" th:value="${keyword}"
-                                            class="col col-8 form-control" placeholder="Cerca">
+                                        <input type="search"
+                                            name="keyword"
+                                            th:value="${keyword}"
+                                            class="col col-8 form-control"
+                                            placeholder="Cerca">
                                     </div>
                                     <div class="col col-3 d-flex justify-content-stretch">
                                         <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
-                                            type="submit"><i class="bi bi-search"></i></button>
+                                            type="submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -57,48 +66,77 @@
                     <div th:if="${categorieEsistenti.size > 0}">
 
                         <!-- Scrollable Wrapper Table -->
-                        <div class="table-responsive" data-bs-theme="dark" style="max-height: 475px; overflow-y: auto;">
+                        <div class="table-responsive"
+                            data-bs-theme="dark"
+                            style="max-height: 475px; overflow-y: auto;">
+
                             <!-- Table -->
                             <table class="table table-dark table-hover">
+
                                 <thead>
                                     <th>ID</th>
                                     <th>Nome categoria</th>
                                     <th class="text-end">Azioni</th>
                                 </thead>
+
                                 <tbody>
                                     <tr th:each="categoria : ${categorieMostrate}" th:object="${categoria}">
                                         <td>[[*{id}]]</td>
                                         <td>[[*{nome}]]</td>
                                         <td class="text-end">
                                             <!-- Dettagli -->
-                                            <button type="button" class="btn btn-sm btn-outline-light"
-                                                data-bs-toggle="modal" th:data-bs-target="'#details-modal-' + *{id}">
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-light"
+                                                data-bs-toggle="modal"
+                                                th:data-bs-target="'#details-modal-' + *{id}">
                                                 <i class="bi bi-justify-left"></i>
                                             </button>
 
                                             <!-- Modale Dettagli -->
-                                            <div class="modal fade" th:id="'details-modal-' + *{id}"
-                                                data-bs-backdrop="static" data-bs-theme="dark" data-bs-keyboard="false"
-                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal fade"
+                                                th:id="'details-modal-' + *{id}"
+                                                data-bs-backdrop="static"
+                                                data-bs-theme="dark"
+                                                data-bs-keyboard="false"
+                                                tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel"
+                                                aria-hidden="true">
+
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
+
+                                                        <!-- Header Modale Dettagli -->
                                                         <div class="modal-header">
+
+                                                            <!-- Nome Evento Modale Dettagli-->
                                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">
                                                                 <i class="bi bi-bookmark-fill"></i> [[*{nome}]]
                                                             </h1>
+                                                            <!-- Fine Nome Evento Modale Dettagli -->
 
-                                                            <button type="button" class="btn btn-outline-danger ms-auto"
-                                                                data-bs-dismiss="modal" aria-label="Close"><i
-                                                                    class="bi bi-x"></i></button>
+                                                            <!-- Chiudi Modale Dettagli -->
+                                                            <button type="button"
+                                                                class="btn btn-outline-danger ms-auto"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <i class="bi bi-x"></i>
+                                                            </button>
+                                                            <!-- Fine Chiudi Modale Dettagli -->
                                                         </div>
+                                                        <!-- Fine Header Modale Dettagli -->
+
+                                                        <!-- Body Modale Dettagli -->
                                                         <div class="modal-body text-start me-auto">
+
                                                             <!-- Descrizione -->
                                                             <div class="text-light fw-medium fs-6 mb-1">Descrizione
                                                             </div>
+
                                                             <div class="text-secondary fw-medium">[[*{descrizione}]]
                                                             </div>
                                                             <!-- Fine Descrizione -->
                                                         </div>
+                                                        <!-- Fine Body Modale Dettagli -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,16 +144,19 @@
                                             <!-- Fine Dettagli -->
 
                                             <!-- Modifica -->
-                                            <a th:href="@{|/categorie/*{id}/modifica|}"
-                                                class="btn btn-sm btn-outline-primary"><i
-                                                    class="bi bi-pencil-fill"></i></a>
+                                            <a th:href="@{|/categorie/*{id}/modifica|}" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
                                             <!-- Fine Modifica -->
 
                                             <!-- Elimina -->
                                             <!-- Elimina Disabilitato -->
-                                            <span th:unless="*{getEventi().isEmpty()}" class="tooltip-trigger"
-                                                data-bs-toggle="tooltip" data-bs-placement="right"
+                                            <span th:unless="*{getEventi().isEmpty()}"
+                                                class="tooltip-trigger"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="right"
                                                 data-bs-title="Non puoi eliminare questa categoria finché è collegata ad uno o più eventi.">
+
                                                 <button type="button" class="btn btn-sm btn-outline-danger" disabled>
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
@@ -123,37 +164,67 @@
                                             <!-- Fine Elimina Disabilitato -->
 
                                             <!-- Elimina Abilitato -->
-                                            <button th:if="*{getEventi().isEmpty()}" type="button"
-                                                class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                                            <button th:if="*{getEventi().isEmpty()}"
+                                                type="button"
+                                                class="btn btn-sm btn-outline-danger"
+                                                data-bs-toggle="modal"
                                                 th:data-bs-target="'#delete-modal-' + *{id}">
+
                                                 <i class="bi bi-trash-fill"></i>
                                             </button>
                                             <!-- Fine Elimina Abilitato -->
 
                                             <!-- Modale Elimina -->
-                                            <div class="modal fade" th:id="'delete-modal-' + *{id}"
-                                                data-bs-backdrop="static" data-bs-theme="dark" data-bs-keyboard="false"
-                                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal fade"
+                                                th:id="'delete-modal-' + *{id}"
+                                                data-bs-backdrop="static"
+                                                data-bs-theme="dark"
+                                                data-bs-keyboard="false"
+                                                tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel"
+                                                aria-hidden="true">
+
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
+
+                                                        <!-- Header Modale Elimina -->
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5 text-danger"
-                                                                id="staticBackdropLabel">
+
+                                                            <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">
                                                                 <i class="bi bi-trash-fill"></i> Elimina categoria
                                                             </h1>
                                                         </div>
+                                                        <!-- Fine Header Modale Elmina -->
+
+                                                        <!-- Body Modale Elimina-->
                                                         <div class="modal-body me-auto">
                                                             Sei sicuro di voler eliminare la categoria: "[[*{nome}]]"?
                                                         </div>
+                                                        <!-- Fine Body Modale Elimina -->
+
+                                                        <!-- Pulsanti Modale -->
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-light me-auto"
-                                                                data-bs-dismiss="modal">Annulla</button>
+
+                                                            <!-- Annulla Modale Elimina -->
+                                                            <button type="button"
+                                                                class="btn btn-outline-light me-auto"
+                                                                data-bs-dismiss="modal">
+                                                                Annulla
+                                                            </button>
+                                                            <!-- Fine Annulla Modale Elimina-->
+
+                                                            <!-- Elimina Modale Elimina -->
                                                             <form th:action="@{|/categorie/*{id}/elimina|}"
                                                                 method="post">
+                                                                
                                                                 <button type="submit"
-                                                                    class="btn btn-outline-danger">Elimina</i></button>
+                                                                    class="btn btn-outline-danger">
+                                                                    Elimina
+                                                                </button>
                                                             </form>
+                                                            <!-- Fine Elimina Modale Elimina-->
                                                         </div>
+                                                        <!-- Fine Pulsanti Modale Elimina -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +240,9 @@
                         <!-- Elemento sostitutivo Corrispondenze -->
                         <div class="text-secondary text-center mt-5 rounded border border-secondary py-3 col-8 mx-auto"
                             th:unless="${categorieMostrate.size > 0}">
+
                             <h3>Nessuna corrispondenza</h3>
+
                             <i class="bi bi-emoji-dizzy fs-1"></i>
                         </div>
                         <!-- Fine Elemento sostitutivo Corrispondenze -->
@@ -190,7 +263,9 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a th:href="@{/categorie/crea}" class="btn btn-lg btn-outline-light">Crea una Categoria</a>
+                    <a th:href="@{/categorie/crea}" class="btn btn-lg btn-outline-light">
+                        Crea una Categoria
+                    </a>
                 </div>
             </div>
             <!-- Fine Elemento Sostiutivo Eventi -->
