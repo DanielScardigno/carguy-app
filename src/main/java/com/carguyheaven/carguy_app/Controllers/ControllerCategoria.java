@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/categorie")
 public class ControllerCategoria {
-    
+
     @Autowired
     RepoCategoria repoCategoria;
 
@@ -39,7 +39,8 @@ public class ControllerCategoria {
         if (keyword == null || keyword.isEmpty()) {
             categorieMostrate = repoCategoria.findAll();
         } else {
-            categorieMostrate = repoCategoria.findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(keyword, keyword);
+            categorieMostrate = repoCategoria.findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(keyword,
+                    keyword);
         }
 
         model.addAttribute("categorieMostrate", categorieMostrate);
@@ -57,7 +58,8 @@ public class ControllerCategoria {
     }
 
     @PostMapping("/crea")
-    public String store(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm, BindingResult bindingResult) {
+    public String store(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm,
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "pagine/categorie/create";
@@ -79,9 +81,10 @@ public class ControllerCategoria {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Non ci sono categorie con id: " + id);
         }
     }
-    
+
     @PostMapping("/{id}/modifica")
-    public String update(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm, BindingResult bindingResult) {
+    public String update(Model model, @Valid @ModelAttribute(name = "categoria") Categoria categoriaForm,
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "pagine/categorie/edit";

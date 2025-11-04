@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.carguyheaven.carguy_app.Models.Evento;
 
-public interface RepoEvento extends JpaRepository<Evento, Integer>{
-    
-    public List<Evento> findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCase(String nome, String descrizione, Sort sort);
+public interface RepoEvento extends JpaRepository<Evento, Integer> {
+
+    public List<Evento> findByNomeContainingIgnoreCaseOrDescrizioneContainingIgnoreCaseOrLuogoContainingIgnoreCase(
+            String nome, String descrizione, String luogo,
+            Sort sort);
 }

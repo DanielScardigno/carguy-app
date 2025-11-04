@@ -57,7 +57,7 @@
                                         </div>
                                         <div>
                                             <input class="form-check-input" type="radio" name="order" id="radioData"
-                                            value="data" th:checked="${order} == 'data'">
+                                                value="data" th:checked="${order} == 'data'">
                                             <label class="form-check-label" for="radioData">Data</label>
                                         </div>
                                         <div>
@@ -83,45 +83,38 @@
                                 <!-- Luogo -->
                                 <label class="form-label" for="luogo"><i class="bi bi-globe-americas-fill"></i>
                                     Luogo</label>
-                                <select id="luogo" class="form-select">
+                                <select id="luogo" name="luogo" class="form-select">
                                     <option selected="selected" value="">Seleziona un luogo</option>
-                                    <option th:each="luogo : ${luoghi}" value="">[[${luogo}]]</option>
+                                    <option th:each="luogoCorrente : ${luoghi}"
+                                            th:value="${luogoCorrente}"
+                                            th:selected="${luogoCorrente == luogo}">[[${luogoCorrente}]]</option>
                                 </select>
                                 <!-- Fine Luogo -->
 
                                 <!-- Data -->
                                 <label class="form-label mt-3" for="data"><i class="bi bi-calendar2-week-fill"></i>
                                     Data</label>
-                                <input type="date" id="data" class="form-control">
+                                <input type="date" name="data" th:value="${data}" id="data" class="form-control">
                                 <!-- Fine Data -->
 
                                 <!-- categoria -->
                                 <label class="form-label mt-3" for="categoria"><i class="bi bi-bookmark-fill"></i>
                                     Categoria</label>
-                                <select id="categoria" class="form-select">
+                                <select id="categoria" name="categoriaId" class="form-select">
                                     <option selected="selected" value="">Seleziona una categoria</option>
-                                    <option th:each="categoria : ${categorie}" value="">[[${categoria.nome}]]
-                                    </option>
+                                    <option th:each="categoriaCorrente : ${categorie}" 
+                                            th:value="${categoriaCorrente.id}"
+                                            th:selected="${categoriaCorrente.id == categoriaId}">[[${categoriaCorrente.nome}]]</option>
                                 </select>
                                 <!-- Fine Categoria -->
 
-                                <!-- Pulsanti -->
-                                <div class="row">
-                                    <!-- Reset -->
-                                    <div class="col col-2 d-flex justify-content-stretch mt-4 ms-auto">
-                                        <button class="btn btn-outline-danger d-flex flex-fill justify-content-center"
-                                            type="reset"><i class="bi bi-arrow-clockwise"></i></button>
-                                    </div>
-                                    <!-- Fine Reset -->
-
-                                    <!-- Submit -->
-                                    <div class="col col-10 d-flex justify-content-stretch mt-4 ms-auto">
-                                        <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
-                                            type="submit">Filtra</button>
-                                    </div>
-                                    <!-- Fine Submit -->
+                                <!-- Submit -->
+                                <div class="d-flex justify-content-stretch mt-4 gap-3 ms-auto">
+                                    <a th:href="@{/home}" class="btn btn-outline-danger"><i class="bi bi-arrow-counterclockwise"></i></a>
+                                    <button class="btn btn-outline-primary d-flex flex-fill justify-content-center"
+                                        type="submit">Filtra</button>
                                 </div>
-                                <!-- Fine Pulsanti -->
+                                <!-- Fine Submit -->
                             </div>
                             <!-- Fine Filtra -->
                         </form>
@@ -136,7 +129,7 @@
                     <div th:if="${eventiEsistenti.size() > 0}">
 
                         <!-- Srollable Wrapper Table -->
-                        <div class="table-responsive" data-bs-theme="dark" style="max-height: 535px; overflow-y: auto;">
+                        <div class="table-responsive" data-bs-theme="dark" style="max-height: 530px; overflow-y: auto;">
                             <!-- Table -->
                             <table class="table table-dark table-hover">
                                 <thead class="sticky-top">
