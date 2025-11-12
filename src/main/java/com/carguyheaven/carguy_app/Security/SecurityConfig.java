@@ -16,7 +16,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(requests -> requests
             .requestMatchers("/eventi").hasAuthority("ADMIN")
-            .requestMatchers("/eventi/crea", "/eventi/*/modifica", "/eventi/*/modifica").hasAnyAuthority("ADMIN", "UTENTE")
+            .requestMatchers("/eventi/crea", "/eventi/*/modifica", "/eventi/*/elimina").hasAnyAuthority("ADMIN", "UTENTE")
             .requestMatchers("/categorie", "/categorie/crea", "/categorie/*/modifica", "/categorie/*/elimina").hasAuthority("ADMIN")
             .requestMatchers("/**").permitAll())
             .formLogin(form -> form
