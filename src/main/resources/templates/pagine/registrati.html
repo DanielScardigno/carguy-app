@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Registrati')}"></head>
+
+<body class="bg-dark">
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/home}"><i class="bi bi-car-front-fill"></i> Carguy Heaven</a>
+            </div>
+        </nav>
+    </header>
+    <!-- Fine Header -->
+
+    <!-- Main -->
+    <main class="mb-5">
+
+        <!-- Titolo -->
+        <h1 class="text-center text-light my-5">Registrati</h1>
+        <!-- Fine Titolo -->
+
+        <!-- Container Principale -->
+        <div class="container">
+
+            <!-- Form -->
+            <form th:action="@{/registrati}" method="post" class="text-light col-3 mx-auto" th:object="${Utente}">
+
+                <!-- Username -->
+                <input class="form-control"
+                    type="text"
+                    name="username"
+                    id="username"
+                    th:value="*{username}"
+                    placeholder="Username"
+                    th:errorClass="is-invalid">
+
+                <!-- Errore -->
+                    <div th:if="${#fields.hasErrors('username')}" class="invalid-feedback fs-6">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('username')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                <!-- Fine Errore -->
+                <!-- Fine Username -->
+
+                <!-- Password -->
+                <input class="form-control mt-3"
+                    type="text"
+                    name="password" 
+                    id="password"
+                    th:value="*{password}"
+                    placeholder="Password">
+
+                <!-- Errore -->
+                    <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback fs-6">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('password')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                <!-- Fine Errore -->
+                <!-- Fine Password -->
+
+                <!-- Submit -->
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-outline-primary mt-3 d-flex flex-fill justify-content-center">
+                        Registrati
+                    </button>
+                </div>
+                <!-- Fine Submit -->
+            </form>
+            <!-- Fine Form -->
+        </div>
+        <!-- Fine Contaier Principale -->
+    </main>
+    <!-- Fine Main -->
+
+    <!-- Popper Js -->
+    <script th:replace="~{fragments/popper :: popper}"></script>
+    <!-- End Popper JS -->
+</body>
+
+</html>

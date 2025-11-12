@@ -1,0 +1,49 @@
+package com.carguyheaven.carguy_app.Security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.authorizeHttpRequests(requests -> requests
+            .requestMatchers("/eventi").hasAuthority("ADMIN")
+            .requestMatchers("/eventi/crea", "/eventi/*/modifica", "/eventi/*/modifica").hasAnyAuthority("ADMIN", "UTENTE")
+            .requestMatchers("/categorie", "/categorie/crea", "/categorie/*/modifica", "/categorie/*/elimina").hasAuthority("ADMIN")
+            .requestMatchers("/**").permitAll())
+            .formLogin(form -> form
+            .loginPage("/login")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/", true)
+            .failureUrl("/login?error=true")
+            .permitAll())
+            .cors(cors -> cors.disable())
+            .csrf(csrf -> csrf.disable());
+        return http.build();
+    }
+
+    @Bean
+    DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    DatabaseUserDetailsService userDetailsService() {
+        return new DatabaseUserDetailsService();
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Accedi')}"></head>
+
+<body class="bg-dark">
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/home}"><i class="bi bi-car-front-fill"></i> Carguy Heaven</a>
+            </div>
+        </nav>
+    </header>
+    <!-- Fine Header -->
+
+    <!-- Main -->
+    <main class="mb-5">
+
+        <!-- Titolo -->
+        <h1 class="text-center text-light my-5">Accedi</h1>
+        <!-- Fine Titolo -->
+
+        <!-- Container Principale -->
+        <div class="container">
+
+            <!-- Form -->
+            <form th:action="@{/login}" method="post" class="text-light col-3 mx-auto">
+
+                <!-- Username -->
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username"
+                    th:classAppend="${param.error} ? is-invalid">
+                <!-- Fine Username -->
+
+                <!-- Password -->
+                <input class="form-control mt-3" type="text" name="password" id="password" placeholder="Password"
+                    th:classAppend="${param.error} ? is-invalid">
+                <!-- Fine Password -->
+
+                <div th:if="${param.error}" class="invalid-feedback fs-6 mt-2">
+                    <ul>
+                        <li>
+                            Username o password errati
+                        </li>
+                    </ul>
+                </div>
+
+                <div th:if="${param.logout}" class="text-success mt-2">
+                    <ul>
+                        <li>
+                            Uscita completata
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex justify-content-stretch mt-3">
+
+                    <div class="col col-6 pe-2">
+                        <a th:href="@{/registrati}"
+                            class="btn btn-outline-primary d-flex flex-fill justify-content-center">Registrati</a>
+                    </div>
+
+                    <div class="col col-6 d-flex ps-2">
+                        <button type="submit"
+                            class="btn btn-outline-primary d-flex flex-fill justify-content-center">Accedi</button>
+                    </div>
+                </div>
+                <!-- Fine Submit -->
+
+
+            </form>
+            <!-- Fine Form -->
+        </div>
+        <!-- Fine Contaier Principale -->
+    </main>
+    <!-- Fine Main -->
+
+    <!-- Popper Js -->
+    <script th:replace="~{fragments/popper :: popper}"></script>
+    <!-- End Popper JS -->
+</body>
+
+</html>

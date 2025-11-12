@@ -12,15 +12,97 @@
                         <a class="nav-link" th:href="@{/eventi/crea}">Crea il tuo evento</a>
                     </li>
                 </ul>
-                <div class="nav-item dropdown navbar-nav ms-auto">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-person-fill-gear"></i> Admin actions
-                    </a>
-                    <ul class="dropdown-menu mb-2">
-                        <li><a class="dropdown-item" th:href="@{/eventi}"><i class="bi bi-pencil-fill"></i> Gestisci Eventi</a></li>
-                        <li><a class="dropdown-item" th:href="@{/categorie}"><i class="bi bi-pencil-fill"></i> Gestisci Categorie</a></li>
-                    </ul>
+                <div class="ms-auto d-lg-flex justify-content-lg-end">
+                    <div class="nav-item dropdown navbar-nav" sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person-fill-gear"></i> Admin actions
+                        </a>
+                        <ul class="dropdown-menu mb-2">
+                            <li><a class="dropdown-item" th:href="@{/eventi}"><i class="bi bi-pencil-fill"></i> Gestisci Eventi</a></li>
+                            <li><a class="dropdown-item" th:href="@{/categorie}"><i class="bi bi-pencil-fill"></i> Gestisci Categorie</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Accedi -->
+                    <div class="ms-lg-5 my-lg-auto mt-2" sec:authorize="isAnonymous">
+                        <a th:href="@{/login}" class="btn btn-sm btn-light">
+                            <i class="bi bi-person-fill"></i> Accedi
+                        </a>
+                    </div>
+                    <!-- Fine Accedi -->
+                    
+                    <!-- Account -->
+                    <div class="ms-lg-5 my-lg-auto mt-2" sec:authorize="isAuthenticated">
+                        <a th:href="@{/account}" class="btn btn-sm btn-light">
+                            <i class="bi bi-person-fill"></i> Account
+                        </a>
+                    </div>
+                    <!-- Fine Account -->
+                    
+                    <!-- Log Out -->
+                    <div class="ms-lg-2 my-lg-auto mt-2" sec:authorize="isAuthenticated">
+                        <button type="button"
+                            class="btn btn-sm btn-outline-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#logout-modal">
+                            Esci
+                        </button>
+
+                        <!-- Modale Log Out -->
+                        <div class="modal fade"
+                            th:id="logout-modal"
+                            data-bs-backdrop="static"
+                            data-bs-theme="dark"
+                            data-bs-keyboard="false"
+                            tabindex="-1"
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+    
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+    
+                                    <!-- Header Modale Log Out -->
+                                    <div class="modal-header">
+    
+                                        <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">
+                                            Esci
+                                        </h1>
+                                    </div>
+                                    <!-- Fine Header Modale Elmina -->
+    
+                                    <!-- Body Modale Log Out-->
+                                    <div class="modal-body me-auto">
+                                        Sei sicuro di voler uscire?
+                                    </div>
+                                    <!-- Fine Body Modale Log Out -->
+    
+                                    <!-- Pulsanti Modale -->
+                                    <div class="modal-footer">
+    
+                                        <!-- Annulla Modale Log Out -->
+                                        <button type="button"
+                                            class="btn btn-outline-light me-auto"
+                                            data-bs-dismiss="modal">
+                                            Annulla
+                                        </button>
+                                        <!-- Fine Annulla Modale Log Out-->
+    
+                                        <!-- Elimina Modale Log Out -->                            
+                                         <a th:href="@{/logout}"
+                                            class="btn btn-outline-danger">
+                                            Esci
+                                         </a>
+                                        <!-- Fine Elimina Modale Log Out-->
+                                    </div>
+                                    <!-- Fine Pulsanti Modale Log Out -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fine Modale Log Out -->
+                    </div>
+
+                    <!-- Fine Log Out -->
                 </div>
             </div>
         </div>
