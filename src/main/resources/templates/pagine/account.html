@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Account')}"></head>
+
+<body class="bg-dark">
+
+    <!-- Header -->
+    <header>
+        <nav th:replace="~{fragments/navBar :: navBar}"></nav>
+    </header>
+    <!-- Fine Header -->
+
+    <!-- Main -->
+    <main class="mb-5">
+
+        <!-- Titolo -->
+        <h1 class="text-center text-light mt-5 mb-3"><i class="bi bi-person-circle"></i> Account</h1>
+        <!-- Fine Titolo -->
+
+        <!-- Container Principale -->
+        <div class="container" th:object="${utente}">
+
+            <!-- Username -->
+            <div class="fs-5 mb-5 text-center">
+                <span class="text-light ">Username:</span>
+                <span class="text-secondary fw-medium">[[*{username}]]</span>
+            </div>
+
+            <h2 class="text-light text-center pt-4 mb-4">I miei Eventi</h2>
+
+            <!-- Table Col -->
+            <div th:if="${eventi.size() > 0}">
+
+                <!-- Srollable Wrapper Table -->
+                <div class="table-responsive" data-bs-theme="dark" style="max-height: 450px; overflow-y: auto;">
+
+                    <!-- Table -->
+                    <table class="table table-dark table-hover">
+
+                        <thead class="sticky-top">
+                            <th>Nome evento</th>
+                            <th>Luogo</th>
+                            <th>Data</th>
+                            <th>Orario</th>
+                            <th>Categoria</th>
+                            <th></th>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="evento : ${eventi}" th:object="${evento}">
+                                <td>[[*{nome}]]</td>
+                                <td>[[*{luogo}]]</td>
+                                <td>[[*{data}]]</td>
+                                <td>[[*{orarioDiInizio}]] - [[*{orarioDiFine}]]</td>
+                                <td>[[*{categoria.nome}]]</td>
+                                <td>
+                                    <div class="d-flex justify-content-end gap-1">
+                                        <!-- Dettagli -->
+                                        <button type="button"
+                                            class="btn btn-sm btn-outline-light"
+                                            data-bs-toggle="modal"
+                                            th:data-bs-target="'#details-modal-' + *{id}">
+                                                    
+                                            <i class="bi bi-justify-left"></i> Dettagli
+                                        </button>
+
+                                        <!-- Modale Dettagli -->
+                                        <div class="modal fade"
+                                            th:id="'details-modal-' + *{id}"
+                                            data-bs-backdrop="static"
+                                            data-bs-theme="dark"
+                                            data-bs-keyboard="false"
+                                            tabindex="-1"
+                                            aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+
+                                                    <!-- Header Modale Dettagli -->
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                            [[*{nome}]]
+                                                        </h1>
+
+                                                        <button type="button"
+                                                            class="btn btn-outline-danger ms-auto"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i class="bi bi-x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <!-- Fine Header Modale Dettagli -->
+
+                                                    <!-- Body Modale Dettagli -->
+                                                    <div class="modal-body text-start me-auto">
+
+                                                        <!-- Categoria -->
+                                                        <div class="text-light fw-medium fs-6 mb-1">
+                                                            Tipo di evento
+                                                        </div>
+
+                                                        <div class="text-secondary fw-medium mb-3">
+                                                            [[*{categoria.nome}]]
+                                                        </div>
+                                                        <!-- Fine Categoria -->
+
+                                                        <!-- Data / Ora -->
+                                                        <div class="text-light fw-medium fs-6 mb-1">
+                                                            Data e ora
+                                                        </div>
+
+                                                        <div class="text-secondary fw-medium mb-3">
+                                                            [[*{data}]] | [[*{orarioDiInizio}]] - [[*{orarioDiFine}]]
+                                                        </div>
+                                                        <!-- Fine Data / Ora -->
+
+                                                        <!-- Luogo -->
+                                                        <div class="text-light fw-medium fs-6 mb-1">
+                                                            Luogo
+                                                        </div>
+
+                                                        <div class="text-secondary mb-3 fw-medium">
+                                                            [[*{luogo}]]
+                                                        </div>
+                                                        <!-- Fine Luogo -->
+
+                                                        <!-- Descrizione -->
+                                                        <div class="text-light fw-medium fs-6 mb-1">
+                                                            Descrizione
+                                                        </div>
+
+                                                        <div class="text-secondary mb-3 fw-medium">
+                                                            [[*{descrizione}]]
+                                                        </div>
+                                                        <!-- Fine Descrizione -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Fine Modale Dettagli -->
+                                        <!-- Fine Dettagli -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Fine Table -->
+            </div>
+            <!-- Fine Table Col -->
+
+            <!-- Elemento sostitutivo Corrispondenze -->
+            <div class="text-secondary text-center mt-5 rounded border border-secondary py-3 col-6 mx-auto"
+                th:unless="${eventi.size > 0}">
+
+                <h3>Ancora Nessun evento</h3>
+
+                <a th:href="@{/eventi/crea}" class="btn btn-primary mt-3 mb-2">Crea evento</a>
+            </div>
+            <!-- Fine Elemento sostitutivo Corrispondenze -->
+        </div>
+        <!-- Fine Contaier Principale -->
+    </main>
+    <!-- Fine Main -->
+
+    <!-- Popper Js -->
+    <script th:replace="~{fragments/popper :: popper}"></script>
+    <!-- End Popper JS -->
+</body>
+
+</html>
