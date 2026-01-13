@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.carguyheaven.carguy_app.Models.Evento;
 import com.carguyheaven.carguy_app.Repositories.RepoCategoria;
 import com.carguyheaven.carguy_app.Repositories.RepoEvento;
+import com.carguyheaven.carguy_app.Repositories.RepoUtente;
+import com.carguyheaven.carguy_app.Security.DatabaseUserDetails;
 
 import jakarta.validation.Valid;
 
@@ -35,6 +38,9 @@ public class ControllerEvento {
 
     @Autowired
     RepoCategoria repoCategoria;
+
+    @Autowired
+    RepoUtente repoUtente;
 
     @GetMapping
     public String index(Model model,
@@ -141,7 +147,8 @@ public class ControllerEvento {
         Model model,
         @Valid
         @ModelAttribute(name = "evento") Evento eventoForm,
-        BindingResult bindingResult
+        BindingResult bindingResult,
+        @AuthenticationPrincipal DatabaseUserDetails databaseUserDetails
     ) {
 
         model.addAttribute("categorie", repoCategoria.findAll());
@@ -150,6 +157,7 @@ public class ControllerEvento {
             return "pagine/eventi/create";
         }
 
+        eventoForm.setCreatore(repoUtente.findById(databaseUserDetails.getId()).get());
         repoEvento.save(eventoForm);
         return "redirect:/home";
     }

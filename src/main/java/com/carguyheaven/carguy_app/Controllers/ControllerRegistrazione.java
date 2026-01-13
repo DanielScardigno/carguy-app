@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/registrati")
-public class ControllerUtente {
+public class ControllerRegistrazione {
     
     @Autowired
     RepoUtente repoUtente;

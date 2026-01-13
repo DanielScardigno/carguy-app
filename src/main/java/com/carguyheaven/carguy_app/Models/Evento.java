@@ -51,6 +51,11 @@ public class Evento {
     @JsonBackReference
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "id_creatore", nullable = false)
+    @JsonBackReference
+    private Utente creatore;
+
     // Getter e Setter
 
     public Integer getId() {
@@ -115,5 +120,13 @@ public class Evento {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Utente getCreatore() {
+        return this.creatore;
+    }
+
+    public void setCreatore(Utente creatore) {
+        this.creatore = creatore;
     }
 }

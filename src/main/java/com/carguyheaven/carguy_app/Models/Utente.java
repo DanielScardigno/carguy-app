@@ -1,5 +1,7 @@
 package com.carguyheaven.carguy_app.Models;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -29,6 +32,9 @@ public class Utente {
     @JoinColumn(name = "id_ruolo", nullable = true)
     @JsonBackReference
     private Ruolo ruolo;
+
+    @OneToMany(mappedBy = "creatore")
+    private List<Evento> eventi;
 
     // Getter e Setter
 
@@ -62,5 +68,13 @@ public class Utente {
 
     public void setRuolo(Ruolo ruolo) {
         this.ruolo = ruolo;
+    }
+
+    public List<Evento> getEventi() {
+        return this.eventi;
+    }
+
+    public void setEventi(List<Evento> eventi) {
+        this.eventi = eventi;
     }
 }
