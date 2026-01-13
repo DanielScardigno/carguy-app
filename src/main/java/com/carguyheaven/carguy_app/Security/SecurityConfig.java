@@ -18,6 +18,7 @@ public class SecurityConfig {
             .requestMatchers("/eventi", "/eventi/*/modifica", "/eventi/*/elimina").hasAuthority("ADMIN")
             .requestMatchers("/eventi/crea").hasAnyAuthority("ADMIN", "UTENTE")
             .requestMatchers("/categorie", "/categorie/crea", "/categorie/*/modifica", "/categorie/*/elimina").hasAuthority("ADMIN")
+            .requestMatchers("/account").hasAnyAuthority("ADMIN", "UTENTE")
             .requestMatchers("/**").permitAll())
             .formLogin(form -> form
             .loginPage("/login")
