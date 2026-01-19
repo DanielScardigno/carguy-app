@@ -112,7 +112,9 @@ public class ControllerHome {
         List<String> luoghi = new ArrayList<String>();
 
         for (Evento evento : repoEvento.findAll()) {
-            luoghi.add(evento.getLuogo());
+            if (!luoghi.contains(evento.getLuogo())) {
+                luoghi.add(evento.getLuogo());
+            }
         }
 
         Collections.sort(luoghi);
