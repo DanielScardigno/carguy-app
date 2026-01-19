@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.carguyheaven.carguy_app.Models.Evento;
+import com.carguyheaven.carguy_app.Models.Utente;
 import com.carguyheaven.carguy_app.Repositories.RepoCategoria;
 import com.carguyheaven.carguy_app.Repositories.RepoEvento;
+import com.carguyheaven.carguy_app.Repositories.RepoRuolo;
 import com.carguyheaven.carguy_app.Repositories.RepoUtente;
 import com.carguyheaven.carguy_app.Security.DatabaseUserDetails;
 
@@ -41,6 +43,9 @@ public class ControllerEvento {
 
     @Autowired
     RepoUtente repoUtente;
+
+    @Autowired
+    RepoRuolo repoRuolo;
 
     @GetMapping
     public String index(Model model,
@@ -173,9 +178,12 @@ public class ControllerEvento {
 
         Optional<Evento> eventoOptional = repoEvento.findById(id);
 
-        if (!databaseUserDetails.getId().equals(eventoOptional.get().getCreatore().getId())) {
+        Utente utente = repoUtente.findById(databaseUserDetails.getId()).get();
+
+        if (!utente.getRuolo().getNome().equals("ADMIN") && !databaseUserDetails.getId().equals(eventoOptional.get().getCreatore().getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Non puoi modificare questo evento");
         }
+        
 
         if (eventoOptional.isPresent()) {
             model.addAttribute("evento", eventoOptional.get());
@@ -194,12 +202,15 @@ public class ControllerEvento {
         BindingResult bindingResult
     ) {
 
+        Evento eventoCorrente = repoEvento.findById(eventoForm.getId()).get();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("categorie", repoCategoria.findAll());
             return "pagine/eventi/edit";
         } else {
+            eventoForm.setCreatore(eventoCorrente.getCreatore());
             repoEvento.save(eventoForm);
-            return "redirect:/eventi";
+            return "redirect:/home";
         }
     }
 
@@ -210,6 +221,6 @@ public class ControllerEvento {
     ) {
 
         repoEvento.deleteById(id);
-        return "redirect:/eventi";
+        return "redirect:/home";
     }
 }
