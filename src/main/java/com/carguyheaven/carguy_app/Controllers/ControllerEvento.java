@@ -165,10 +165,15 @@ public class ControllerEvento {
     @GetMapping("/{id}/modifica")
     public String edit(
         Model model,
-        @PathVariable Integer id
+        @PathVariable Integer id,
+        @AuthenticationPrincipal DatabaseUserDetails databaseUserDetails
     ) {
 
         Optional<Evento> eventoOptional = repoEvento.findById(id);
+
+        if (!databaseUserDetails.getId().equals(eventoOptional.get().getCreatore().getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Non puoi modificare questo evento");
+        }
 
         if (eventoOptional.isPresent()) {
             model.addAttribute("evento", eventoOptional.get());

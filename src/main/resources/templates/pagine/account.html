@@ -141,6 +141,73 @@
                                         </div>
                                         <!-- Fine Modale Dettagli -->
                                         <!-- Fine Dettagli -->
+
+                                        <!-- Modifica -->
+                                        <a th:href="@{|/eventi/*{id}/modifica|}"
+                                            class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <!-- Fine Modifica -->
+
+                                        <!-- Elimina -->
+                                        <button type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            data-bs-toggle="modal"
+                                            th:data-bs-target="'#delete-modal-' + *{id}">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+
+                                        <!-- Modale Elimina -->
+                                        <div class="modal fade"
+                                            th:id="'delete-modal-' + *{id}"
+                                            data-bs-backdrop="static"
+                                            data-bs-theme="dark"
+                                            data-bs-keyboard="false"
+                                            tabindex="-1"
+                                            aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+
+                                                    <!-- Header Modale Elimina -->
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5 text-danger"
+                                                            id="staticBackdropLabel">
+                                                            <i class="bi bi-trash-fill"></i> Elimina evento
+                                                        </h1>
+                                                    </div>
+                                                    <!-- Fine Header Modale Elimina -->
+
+                                                    <!-- Body Modale Elimina -->
+                                                    <div class="modal-body me-auto">
+                                                        Sei sicuro di voler eliminare l'evento: "[[*{nome}]]"?
+                                                    </div>
+                                                    <!-- Fine Body Modale Elimina -->
+
+                                                    <!-- Footer Modale Elimina -->
+                                                    <div class="modal-footer">
+
+                                                        <button type="button"
+                                                            class="btn btn-outline-light me-auto"
+                                                            data-bs-dismiss="modal">
+                                                            Annulla
+                                                        </button>
+
+                                                        <form th:action="@{|/eventi/*{id}/elimina|}"
+                                                            method="post">
+                                                            <button type="submit"
+                                                                class="btn btn-outline-danger">
+                                                                Elimina</i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <!-- Finr Footer Modale Elimina -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Fine Modale Elimina -->
+                                        <!-- Fine Elimina -->
                                     </div>
                                 </td>
                             </tr>
