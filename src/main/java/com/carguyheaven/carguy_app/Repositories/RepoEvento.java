@@ -15,4 +15,6 @@ public interface RepoEvento extends JpaRepository<Evento, Integer> {
         String luogo,
         Sort sort
     );
+
+    public Integer countByLuogo(String luogo);
 }

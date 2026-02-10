@@ -150,6 +150,8 @@
                                         th:value="${luogoCorrente}"
                                         th:selected="${luogoCorrente == luogo}">
                                         [[${luogoCorrente}]]
+                                        -
+                                        ([[${@repoEvento.countByLuogo(luogoCorrente)}]])
                                     </option>
                                 </select>
                                 <!-- Fine Luogo -->
